@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebFolio | Damar Arif Ghifari</title>
+    <title>WebFolio.ID</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,10 +11,18 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+<div class="loading-screen" id="loading-screen">
+    <div class="loader-content">
+        <h1 id="progress-text">0%</h1>
+        <div class="progress-bar">
+            <span id="progress-line"></span>
+        </div>
+        <p>Loading your experience...</p>
+    </div>
+</div>
 <!-- ================= NAVBAR ================= -->
 <nav>
-    <div class="logo">Damar</div>
+    <a href="#home" class="logo">By WebFolio.ID</a>
 
     <div class="menu-toggle" id="mobile-menu">
         <span></span>
@@ -34,34 +42,34 @@
     <div class="home-content">
 
         <div class="home-text">
-    <h1 class="reveal">
-        <span id="typing"></span><span class="cursor">|</span>
-    </h1>
+            <h1 class="home-anim">
+                <span id="typing"></span><span class="cursor">|</span>
+            </h1>
 
-    <h3 class="reveal delay-1">Junior Web Developer</h3>
+            <h3 class="home-anim">Junior Web Developer</h3>
 
-    <p class="reveal delay-1">
-        Mahasiswa Informatika yang antusias membangun website modern, responsif, 
-        dan fungsional. Fokus menciptakan pengalaman pengguna yang menarik 
-        melalui kode yang rapi dan efisien.
-    </p>
+            <p class="home-anim">
+                Mahasiswa Informatika yang antusias membangun website modern, responsif, 
+                dan fungsional. Fokus menciptakan pengalaman pengguna yang menarik 
+                melalui kode yang rapi dan efisien.
+            </p>
 
-    <div class="button-home reveal delay-2">
-        <a href="#project" class="btn-primary">Explore My Project</a>
-        <a href="cv-damar.pdf" download class="btn-secondary">
-            Download CV <i class="fa-solid fa-download"></i>
-        </a>
-    </div>
+            <div class="button-home home-anim">
+                <a href="#project" class="btn-primary">Explore My Project</a>
+                <a href="cv-damar.pdf" download class="btn-secondary">
+                    Download CV <i class="fa-solid fa-download"></i>
+                </a>
+            </div>
 
-    <div class="social-media reveal delay-2">
-        <a href="https://wa.me/6281369149235" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
-        <a href="mailto:damarghifari2@gmail.com"><i class="fa-regular fa-envelope"></i></a>
-        <a href="https://linkedin.com/in/damararif" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
-        <a href="https://github.com/damar666" target="_blank"><i class="fa-brands fa-github"></i></a>
-    </div>
-</div>
+            <div class="social-media home-anim">
+                <a href="https://wa.me/6281369149235" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="mailto:damarghifari2@gmail.com"><i class="fa-regular fa-envelope"></i></a>
+                <a href="https://linkedin.com/in/damararif" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://github.com/damar666" target="_blank"><i class="fa-brands fa-github"></i></a>
+            </div>
+        </div>
 
-        <div class="home-image">
+        <div class="home-image home-anim">
             <img src="damarr.jpeg" alt="Foto Damar Arif Ghifari">
         </div>
 

@@ -1,79 +1,132 @@
 document.addEventListener("DOMContentLoaded", function () {
-    
-    // 1. TYPING EFFECT (TETAP SAMA)
+
+    // =========================================================
+    // 1. SETUP TYPING EFFECT (EFEK MENGETIK)
+    // =========================================================
     const typingElement = document.getElementById("typing");
     const cursor = document.querySelector(".cursor");
+    const text = "Halo, Saya Damar Arif Ghifari"; // Teks yang mau diketik
+    let index = 0;
+    const typingSpeed = 100; // Kecepatan mengetik (ms)
 
-    if (typingElement) {
-        const text = "Halo, Saya Damar Arif Ghifari";
-        let index = 0;
-        const speed = 100;
-
-        function typing() {
-            if (index < text.length) {
-                typingElement.textContent += text.charAt(index);
-                index++;
-                setTimeout(typing, speed);
-            } else {
-                if (cursor) cursor.style.display = "none";
-            }
+    function startTyping() {
+        if (typingElement && index < text.length) {
+            typingElement.textContent += text.charAt(index);
+            index++;
+            setTimeout(startTyping, typingSpeed);
+        } else {
+            // Kalau sudah selesai ngetik, hilangkan kursor (opsional)
+            if (cursor) cursor.style.display = "none"; 
         }
-        typing();
     }
 
-    // 2. SCROLL REVEAL (LOOPING & SMOOTH)
+    // =========================================================
+    // 2. LOGIKA LOADING SCREEN & HOME ANIMATION
+    // =========================================================
+    const loadingScreen = document.getElementById('loading-screen');
+    const progressText = document.getElementById('progress-text');
+    const progressLine = document.getElementById('progress-line');
+
+    // Kunci Scroll saat loading berjalan
+    document.body.style.overflow = 'hidden';
+
+    let count = 0;
+    const loadingInterval = setInterval(() => {
+        count++;
+        
+        // Update angka dan lebar garis
+        if (progressText) progressText.innerText = count + "%";
+        if (progressLine) progressLine.style.width = count + "%";
+
+        // --- SAAT LOADING SELESAI (100%) ---
+        if (count === 100) {
+            clearInterval(loadingInterval); // Hentikan hitungan
+
+            // Tunggu sebentar (500ms) lalu jalankan transisi masuk
+            setTimeout(() => {
+                
+                // A. Hilangkan Layar Hitam Loading
+                if (loadingScreen) {
+                    loadingScreen.classList.add('finish');
+                }
+                
+                // B. Kembalikan Scroll (User bisa scroll lagi)
+                document.body.style.overflow = 'auto';
+
+                // C. Panggil Animasi Home (Elemen turun dari atas)
+                const homeElements = document.querySelectorAll('.home-anim');
+                homeElements.forEach(el => {
+                    el.classList.add('show');
+                });
+
+                // D. Jalankan TYPING EFFECT (Delay dikit biar pas teks "Halo" sudah turun)
+                setTimeout(() => {
+                    startTyping(); 
+                }, 800); 
+
+            }, 500);
+        }
+    }, 25); 
+
+    // =========================================================
+    // 3. REMOTE HOVER (LOGO -> FOTO)
+    // =========================================================
+    const myLogo = document.querySelector('.logo');     
+    const myPhoto = document.querySelector('.home-image img'); 
+
+    if (myLogo && myPhoto) {
+        // Saat Mouse Masuk ke Logo -> Foto Nyala
+        myLogo.addEventListener('mouseenter', () => {
+            myPhoto.classList.add('active-glow'); 
+        });
+
+        // Saat Mouse Keluar dari Logo -> Foto Normal
+        myLogo.addEventListener('mouseleave', () => {
+            myPhoto.classList.remove('active-glow'); 
+        });
+    }
+
+    // =========================================================
+    // 4. MOBILE MENU (NAVBAR HP)
+    // =========================================================
+    const menuToggle = document.getElementById('mobile-menu');
+    const navList = document.querySelector('.nav-list');
+
+    // A. Fitur Buka/Tutup Menu saat tombol diklik
+    if (menuToggle && navList) {
+        menuToggle.addEventListener('click', () => {
+            navList.classList.toggle('active');
+        });
+    } else {
+        console.error("ERROR: Elemen Menu tidak ditemukan! Cek HTML ID/Class.");
+    }
+
+    // B. Fitur Auto-Close (Menu nutup sendiri pas Link diklik)
+    const navLinks = document.querySelectorAll('.nav-list a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (navList) navList.classList.remove('active');
+        });
+    });
+
+    // =========================================================
+    // 5. SCROLL REVEAL (ANIMASI SAAT DI-SCROLL)
+    // =========================================================
     const observerOptions = {
-        // Threshold 0.15: Animasi baru jalan kalau 15% elemen masuk layar.
-        // Ini mencegah animasi "kaget" kalau baru kena pixel ujung doang.
-        threshold: 0.15
+        threshold: 0.15 
     };
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
-            // Kalau elemen masuk layar:
             if (entry.isIntersecting) {
-                entry.target.classList.add("active");
-            } 
-            // Kalau elemen KELUAR layar:
-            else {
-                // Kita cabut kelas 'active' SUPAYA animasi bisa ulang lagi nanti.
-                // TAPI, karena CSS kamu sudah ada 'transition', hilangnya bakal pelan-pelan (fade out)
-                // Jadi gak bakal glitch/error.
-                entry.target.classList.remove("active");
+                entry.target.classList.add("active"); 
+            } else {
+                entry.target.classList.remove("active"); 
             }
         });
     }, observerOptions);
-    // 3. MENU TOGGLE (DIPERBAIKI)
-    const menuToggle = document.getElementById('mobile-menu');
-    const navList = document.querySelector('.nav-list');
 
-    // Cek apakah elemennya ketemu?
-    if (menuToggle && navList) {
-        menuToggle.addEventListener('click', () => {
-            console.log("Tombol berhasil diklik!"); // Cek di Console browser
-            navList.classList.toggle('active');
-        });
-    } else {
-        console.error("ERROR: ID 'mobile-menu' atau Class '.nav-list' tidak ditemukan di HTML!");
-    }
-    // ... kode menuToggle yang tadi ...
-
-    // --- TAMBAHAN BARU: TUTUP MENU SAAT LINK DIKLIK ---
-    
-    // 1. Ambil semua link yang ada di dalam nav-list
-    const navLinks = document.querySelectorAll('.nav-list a');
-
-    // 2. Pasang kuping (event listener) di setiap link
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            // Hapus class 'active' biar menunya nutup
-            navList.classList.remove('active');
-            
-            // Opsional: Kalau kamu mau logikanya console log
-            console.log("Menu ditutup karena link diklik");
-        });
-    });
-    // ... sisa kode hiddenElements biarkan saja ...
     const hiddenElements = document.querySelectorAll(".reveal");
     hiddenElements.forEach((el) => observer.observe(el));
+
 });

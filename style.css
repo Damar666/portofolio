@@ -37,7 +37,66 @@ body {
     background-position: 0% 50%;
   }
 }
+/* --- LOADING SCREEN --- */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #1a1a2e; /* Samakan dengan warna background websitemu */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Wajib paling tinggi biar nutupin semuanya */
+    transition: opacity 0.5s ease-out, visibility 0.5s;
+}
 
+.loader-content {
+    text-align: center;
+    color: white;
+}
+
+.loader-content h1 {
+    font-size: 4rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif; /* Sesuaikan font kamu */
+    background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%); /* Efek warna gradasi */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.progress-bar {
+    width: 200px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    margin: 0 auto 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+#progress-line {
+    display: block;
+    height: 100%;
+    width: 0%; /* Nanti ini jalan pakai JS */
+    background: #4facfe; /* Warna loading barnya */
+    border-radius: 10px;
+    transition: width 0.1s;
+}
+
+.loader-content p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 2px;
+}
+
+/* Class untuk menghilangkan loading screen */
+.loading-screen.finish {
+    opacity: 0;
+    visibility: hidden;
+}
 
 /* Delay bertingkat (Biar jatuhnya gantian kayak hujan) */
 .delay-1 { transition-delay: 0.2s; }
@@ -81,7 +140,126 @@ nav ul li a {
 nav ul li a:hover {
   color: #7aa2ff;
 }
+/* --- STYLE LOGO UTAMA --- */
+.logo {
+    font-size: 1.7rem; /* Ukuran font logo */
+    font-weight: 700;
+    color: white;
+    text-decoration: none; /* Hilangkan garis bawah link */
+    
+    /* Setup buat animasi box */
+    padding: 5px 20px; /* Ruang nafas biar box-nya gak sempit */
+    border-radius: 50px; /* Bentuk Pill */
+    transition: all 0.3s ease; /* Transisi halus */
+    position: relative;
+    z-index: 1000;
+}
 
+/* --- LOGO HOVER EFFECT (SAAT MOUSE DITARO) --- */
+.logo:hover {
+    /* 1. Warna Berubah */
+    color: #4facfe; 
+    
+    /* 2. Background Glass Transparan */
+    background: rgba(255, 255, 255, 0.1);
+    
+    /* 3. Efek Glowing (Bercahaya) */
+    box-shadow: 0 0 15px rgba(79, 172, 254, 0.4), 
+                0 0 30px rgba(79, 172, 254, 0.2);
+    
+    /* 4. Gerakan Spesial Logo: Naik + Membesar Dikit + Huruf Melebar */
+    transform: translateY(-3px) scale(1.05); 
+    letter-spacing: 2px; /* Huruf D a m a r jadi agak renggang (keren!) */
+}
+/* --- FOTO PROFIL SUPER ANIMATION --- */
+
+/* 1. STATE AWAL (Kondisi Diam) */
+.home-image img {
+    width: 100%; /* Atau ukuran px kamu */
+    /* Pastikan border radius bulat atau sesuai selera */
+    border-radius: 50%; 
+    border: 4px solid rgba(255, 255, 255, 0.1); /* Border tipis transparan */
+    
+    /* PENTING: Transisi dibuat 'Bouncy' (Membal) biar kerasa organic */
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    
+    /* Filter normal */
+    filter: brightness(1);
+    box-shadow: none;
+}
+
+/* 2. STATE ANIMASI (Saat Mouse di Foto ATAU di Logo) */
+/* Kita gabung selektornya biar efeknya 100% SAMA */
+.home-image img:hover, 
+.home-image img.active-glow {
+    /* GERAKAN: Membesar 10% dan Miring 3 derajat (Kunci biar kerasa beda) */
+    transform: scale(1.1) rotate(3deg); 
+    
+  border-color: #fff;
+
+  /* Efek bayangan berlapis (Cyan, Pink, Kuning) */
+  box-shadow: 0 0 20px #00e5ff, /* Lapisan 1: Biru Cyan */ 0 0 40px #ff00ff,
+    /* Lapisan 2: Pink Magenta */ 0 0 60px #ffee00; /* Lapisan 3: Kuning Neon */
+
+  /* Sedikit diperbesar biar makin keren */
+  transform: scale(1.05);
+
+    /* WARNA: Foto jadi lebih cerah & tajam */
+    filter: brightness(1.2) contrast(1.1);
+    
+    /* BORDER: Ikut berubah warna jadi biru neon */
+    border-color: #4facfe;
+    
+    /* Kursor jadi pointer */
+    cursor: pointer;
+}
+/* --- HOVER EFEK NAVBAR (MODERN GLASS PILL) --- */
+
+/* Ini tampilan dasar link navbar di Laptop */
+.nav-list a {
+    position: relative;
+    padding: 8px 18px; /* Memberi ruang untuk box-nya */
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 50px; /* Membuat sudutnya bulat (Pill Shape) */
+    transition: all 0.3s ease; /* Wajib ada biar smooth */
+    z-index: 1; /* Pastikan teks ada di atas */
+}
+
+/* KETIKA MOUSE DI-TARO (HOVER) */
+.nav-list a:hover {
+    /* 1. Warna Teks Berubah jadi Terang */
+    color: #4facfe; /* Biru muda neon */
+    
+    /* 2. Muncul Box Transparan (Glass Effect) */
+    background: rgba(255, 255, 255, 0.1); 
+    
+    /* 3. Efek Glowing (Bercahaya) */
+    box-shadow: 0 0 15px rgba(79, 172, 254, 0.3), 
+                0 0 30px rgba(79, 172, 254, 0.1);
+    
+    /* 4. Sedikit Naik ke Atas (Levitation) */
+    transform: translateY(-3px);
+}
+
+/* VARIASI: GARIS BAWAH BERJALAN (Opsional - Tambahan Keren) */
+/* Ini bikin garis biru jalan dari kiri ke kanan di bawah teks */
+.nav-list a::after {
+    content: '';
+    position: absolute;
+    bottom: 5px; /* Jarak garis dari bawah */
+    left: 50%; /* Mulai dari tengah */
+    width: 0%; /* Awalnya lebarnya 0 (hilang) */
+    height: 2px;
+    background-color: #4facfe;
+    transition: all 0.3s ease;
+    transform: translateX(-50%); /* Biar mekar dari tengah */
+}
+
+.nav-list a:hover::after {
+    width: 70%; /* Pas hover, garisnya memanjang jadi 70% lebar box */
+}
 /* ================= SECTION UMUM ================= */
 section {
   min-height: 100vh;
@@ -239,7 +417,41 @@ section p {
 }
 
 /* ================= UPDATE HOME TEXT ================= */
+/* --- ANIMASI INTRO HOME --- */
 
+/* State Awal (Ngumpet) */
+.home-anim {
+    opacity: 0;
+    transform: translateY(-50px); /* Geser ke atas */
+    transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); /* Gerakan Smooth */
+}
+
+/* State Akhir (Muncul) - Class ini ditambah via JS */
+.home-anim.show {
+    opacity: 1;
+    transform: translateY(0); /* Balik ke posisi normal */
+}
+
+/* --- URUTAN MUNCUL (DELAY) --- */
+/* Biar gak barengan, tapi estafet */
+
+/* 1. Foto Profil (Muncul duluan biar ganteng) */
+.home-image.home-anim { transition-delay: 0.2s; }
+
+/* 2. Judul (Halo Saya...) */
+.home-text h1.home-anim { transition-delay: 0.4s; }
+
+/* 3. Subjudul (Junior Web...) */
+.home-text h3.home-anim { transition-delay: 0.6s; }
+
+/* 4. Paragraf */
+.home-text p.home-anim { transition-delay: 0.8s; }
+
+/* 5. Tombol */
+.button-home.home-anim { transition-delay: 1.0s; }
+
+/* 6. Sosmed (Terakhir) */
+.social-media.home-anim { transition-delay: 1.2s; }
 /* 1. Styling Nama (H1) - Biar konsisten */
 /* ================= FORCE SHOW CONTENT ================= */
 /* Kode ini memaksa semua elemen reveal untuk muncul */
@@ -309,7 +521,8 @@ section p {
      transform: translateX(-20px); 
   }
   .home-image img {
-    margin-right: 55px;
+    margin-right: 140px;
+    margin-top: 40px
   }
   .home-text h3 {
     font-size: 24px;
