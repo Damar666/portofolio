@@ -129,12 +129,97 @@ section h2::after {
     border-radius: 5px;  /* Ujung tumpul */
     box-shadow: 0 0 10px #7aa2ff; /* Garisnya bersinar */
 }
+/* --- TAMPILAN STANDAR (LAPTOP) --- */
+.menu-toggle {
+    display: none; /* Sembunyikan tombol garis tiga di laptop */
+    flex-direction: column;
+    cursor: pointer;
+}
 
+.menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background-color: white; /* Sesuaikan warna garis */
+    margin-bottom: 4px;
+    border-radius: 2px;
+}
 /* Responsive HP */
 @media (max-width: 768px) {
     section h2 {
         font-size: 32px;
         margin-bottom: 40px;
+    }
+    .navbar {
+        flex-direction: column; /* Biar menunya turun ke bawah (vertikal) */
+        height: auto;
+    }
+    .navbar-menu {
+        display: flex; /* Paksa muncul */
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+    }
+.nav-list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        
+        /* PERUBAHAN 1: Ukuran lebih ramping (50%) */
+        width: 50%; 
+        
+        /* PERUBAHAN 2: Efek Glassmorphism (Kaca Buram) */
+        /* Ini bikin foto di belakang menu jadi blur, teks jadi jelas */
+        background-color: rgba(26, 26, 46, 0.7); /* Lebih transparan dikit */
+        backdrop-filter: blur(15px); /* INI KUNCINYA (Blurring) */
+        -webkit-backdrop-filter: blur(15px); /* Support Safari */
+        
+        /* PERUBAHAN 3: Garis pinggir halus biar elegan */
+        border-left: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: -10px 0 20px rgba(0,0,0,0.5);
+        
+        z-index: 998;
+        
+        /* Animasi */
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+
+    /* Style Link - Kasih efek hover biar interaktif */
+    .nav-list li {
+        margin: 25px 0;
+        width: 100%; /* Biar area klik luas */
+        text-align: center;
+    }
+
+    .nav-list li a {
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.8); /* Putih agak soft */
+        font-weight: 500;
+        transition: all 0.3s ease;
+        display: block;
+    }
+
+    /* Pas link disentuh jari/hover, jadi putih terang & glow */
+    .nav-list li a:hover {
+        color: #ffffff;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        transform: scale(1.1); /* Membesar dikit */
+    }
+
+    .nav-list.active {
+        transform: translateX(0);
+    }
+    
+    .menu-toggle {
+        display: flex;
+        z-index: 999;
+        position: relative;
     }
 }
 

@@ -43,7 +43,37 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     }, observerOptions);
+    // 3. MENU TOGGLE (DIPERBAIKI)
+    const menuToggle = document.getElementById('mobile-menu');
+    const navList = document.querySelector('.nav-list');
 
+    // Cek apakah elemennya ketemu?
+    if (menuToggle && navList) {
+        menuToggle.addEventListener('click', () => {
+            console.log("Tombol berhasil diklik!"); // Cek di Console browser
+            navList.classList.toggle('active');
+        });
+    } else {
+        console.error("ERROR: ID 'mobile-menu' atau Class '.nav-list' tidak ditemukan di HTML!");
+    }
+    // ... kode menuToggle yang tadi ...
+
+    // --- TAMBAHAN BARU: TUTUP MENU SAAT LINK DIKLIK ---
+    
+    // 1. Ambil semua link yang ada di dalam nav-list
+    const navLinks = document.querySelectorAll('.nav-list a');
+
+    // 2. Pasang kuping (event listener) di setiap link
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            // Hapus class 'active' biar menunya nutup
+            navList.classList.remove('active');
+            
+            // Opsional: Kalau kamu mau logikanya console log
+            console.log("Menu ditutup karena link diklik");
+        });
+    });
+    // ... sisa kode hiddenElements biarkan saja ...
     const hiddenElements = document.querySelectorAll(".reveal");
     hiddenElements.forEach((el) => observer.observe(el));
 });
