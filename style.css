@@ -1,0 +1,837 @@
+/* ================= GLOBAL ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  color: #e0e6ed;
+  line-height: 1.6;
+  overflow-x: hidden;
+
+  /* --- SETTING BACKGROUND BERGERAK --- */
+  /* Kita pakai 4 warna gelap: Hitam, Biru Tua, Ungu Gelap, Biru Laut */
+  background: linear-gradient(-45deg, #02050a, #0b2545, #1d1330, #001220);
+  
+  /* Ukuran diperbesar 4x lipat (400%) supaya bisa digeser-geser */
+  background-size: 400% 400%;
+  
+  /* Animasi jalan terus (infinite) selama 15 detik */
+  animation: gradientBG 15s ease infinite;
+}
+/* RUMUS GERAKAN BACKGROUND */
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+/* Delay bertingkat (Biar jatuhnya gantian kayak hujan) */
+.delay-1 { transition-delay: 0.2s; }
+.delay-2 { transition-delay: 0.4s; }
+.delay-3 { transition-delay: 0.6s; }
+/* ================= NAVBAR ================= */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 18px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(28, 32, 39, 0.9); /* Gelap transparan */
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+nav h2 {
+  color: #7aa2ff; /* Biru Neon */
+  font-size: 24px;
+  font-weight: bold;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+nav ul li a:hover {
+  color: #7aa2ff;
+}
+
+/* ================= SECTION UMUM ================= */
+section {
+  min-height: 100vh;
+  padding: 100px 9% 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Judul Section */
+/* ================= JUDUL SECTION KEREN (ANTI BOSEN) ================= */
+
+/* 1. Style Dasar H2 (Teks Putih) */
+section h2 {
+    font-size: 42px; /* Ukuran besar */
+    font-weight: 800; /* Tebal banget */
+    color: #fff;      /* Warna kata pertama (My) */
+    text-align: center;
+    text-transform: uppercase; /* Huruf kapital semua */
+    letter-spacing: 2px; /* Jarak antar huruf */
+    margin-bottom: 60px; /* Jarak ke konten di bawahnya */
+    position: relative;
+    display: table; /* Trik biar garis bawah pas di tengah */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 2. Style Kata Kedua (SPAN - Biru Neon) */
+section h2 span {
+    color: #7aa2ff; /* Biru Neon */
+    text-shadow: 0 0 20px rgba(122, 162, 255, 0.6); /* Efek Glow Cahaya */
+}
+
+/* 3. Garis Neon Kecil di Bawah Judul */
+section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -15px; /* Jarak garis dari teks */
+    left: 50%;
+    transform: translateX(-50%); /* Pas di tengah */
+    width: 80px;  /* Panjang garis */
+    height: 4px;  /* Tebal garis */
+    background: #7aa2ff; /* Warna garis */
+    border-radius: 5px;  /* Ujung tumpul */
+    box-shadow: 0 0 10px #7aa2ff; /* Garisnya bersinar */
+}
+
+/* Responsive HP */
+@media (max-width: 768px) {
+    section h2 {
+        font-size: 32px;
+        margin-bottom: 40px;
+    }
+}
+
+section p {
+  color: #cbd5e1;
+}
+
+/* ================= HOME ================= */
+.home-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 50px;
+    /* Tambahkan ini biar layout gak gerak-gerak */
+    min-height: 500px; 
+}
+
+/* ================= UPDATE HOME TEXT ================= */
+
+/* 1. Styling Nama (H1) - Biar konsisten */
+/* ================= FORCE SHOW CONTENT ================= */
+/* Kode ini memaksa semua elemen reveal untuk muncul */
+
+
+/* Memperbesar Font H1 secara Paksa */
+.home-text {
+    flex: 1; /* Mengisi ruang kosong kiri sepenuhnya dari awal */
+    max-width: 600px; /* Batasi lebarnya biar gak nabrak foto */
+    text-align: left; /* Pastikan semua teks rata kiri */
+}
+/* 2. Styling Jabatan "Junior Web Developer" (GRADIENT TEXT) */
+/* ================= TEXT JUNIOR WEB DEVELOPER (WARNA-WARNI GERAK) ================= */
+.home-text h3 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    
+    /* 1. KITA BUAT GRADIENT YANG LEBIH BANYAK WARNA */
+    /* Urutan: Biru -> Cyan -> Ungu -> Pink -> Balik ke Biru */
+    background: linear-gradient(to right, #7aa2ff, #00e5ff, #bd34fe, #ff00ff, #7aa2ff);
+    
+    /* 2. PERBESAR UKURAN BACKGROUND SUPAYA BISA DIGESER */
+    background-size: 300% auto;
+    
+    /* 3. CLIP BACKGROUND KE TEKS */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    /* 4. ANIMASI GERAK TERUS SELAMANYA */
+    animation: gradientText 3s linear infinite;
+    
+    /* Glow dikit biar mantap */
+    filter: drop-shadow(0 0 5px rgba(122, 162, 255, 0.4));
+}
+
+/* RUMUS GERAKAN TEKS */
+@keyframes gradientText {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+/* 3. Styling Deskripsi Paragraf */
+.home-text p {
+    font-size: 16px;
+    color: #cbd5e1;
+    line-height: 1.8;
+    
+    /* SOLUSI MASALAHMU: */
+    margin: 0 0 30px 0; /* Reset margin (Atas Kanan Bawah Kiri) */
+    text-align: left; /* Paksa rata kiri */
+    
+    /* Hapus max-width auto kalau ada, ganti fix */
+    width: 100%; 
+}
+
+/* RESPONSIVE HP */
+@media (max-width: 768px) {
+  .home-text h1 {
+    font-size: 32px;
+  }
+  .home-text h3 {
+    font-size: 24px;
+  }
+  .home-text p {
+    font-size: 14px;
+    margin: 0 auto 30px; /* Tengah */
+  }
+}
+.home-text h1 {
+  font-size: 32px;
+}
+.home-text h3 {
+  font-size: 24px;
+}
+.home-text p {
+  font-size: 14px;
+  margin: 0 auto 30px; /* Tengah */
+}
+
+.button-home {
+  margin-top: 30px;
+  display: flex;
+  gap: 20px;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 12px 30px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn-primary {
+  background: #7aa2ff;
+  color: #02050a;
+}
+
+.btn-secondary {
+  border: 2px solid #7aa2ff;
+  color: #7aa2ff;
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+  box-shadow: 0 0 20px rgba(122, 162, 255, 0.5);
+  background: #fff;
+  color: #02050a;
+}
+
+/* ================= UPDATE POSISI FOTO HOME ================= */
+.home-image {
+  flex: 1;
+  display: flex;
+  justify-content: center; /* Tetap center secara default */
+  margin-left: 120px;
+  /* CARA 1: Geser paksa ke kiri menggunakan Transform */
+  /* Angka negatif (-) artinya geser ke KIRI. Coba -30px, -50px, dst sesuai selera */
+  transform: translateX(-40px);
+
+  /* CARA 2 (Opsional): Kalau mau pakai margin kanan supaya kedorong ke kiri */
+  /* margin-right: 50px; */
+}
+
+/* Pastikan animasi float di gambar tetap jalan (tidak terganggu) */
+.home-image img {
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #7aa2ff;
+  box-shadow: 0 0 30px rgba(122, 162, 255, 0.3);
+
+  /* Animasi naik turun tetap di sini */
+  animation: float 6s ease-in-out infinite;
+  transition: all 0.5s ease-in-out;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* Animasi Ketik */
+.cursor {
+  color: #7aa2ff;
+  animation: blink 1s infinite;
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+/* =================================================
+   EFEK HOVER FOTO HOME (WARNA-WARNI)
+================================================= */
+.home-image img {
+  /* Pastikan transisi halus */
+  transition: all 0.5s ease-in-out;
+}
+
+.home-image img:hover {
+  /* Saat mouse masuk, border jadi putih terang */
+  border-color: #fff;
+
+  /* Efek bayangan berlapis (Cyan, Pink, Kuning) */
+  box-shadow: 0 0 20px #00e5ff, /* Lapisan 1: Biru Cyan */ 0 0 40px #ff00ff,
+    /* Lapisan 2: Pink Magenta */ 0 0 60px #ffee00; /* Lapisan 3: Kuning Neon */
+
+  /* Sedikit diperbesar biar makin keren */
+  transform: scale(1.05);
+}
+/* ================= SOCIAL MEDIA ICONS (HOME) ================= */
+.social-media {
+  display: flex;
+  gap: 20px; /* Jarak antar icon */
+  margin-top: 35px; /* Jarak dari tombol di atasnya */
+}
+
+.social-media a {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+  background: transparent;
+  border: 2px solid #7aa2ff; /* Border Biru Neon */
+  border-radius: 50%; /* Jadi Bulat */
+  font-size: 20px;
+  color: #7aa2ff; /* Warna Icon */
+  text-decoration: none;
+  transition: 0.4s ease;
+
+  /* Efek Kaca Tipis di dalam lingkaran */
+  backdrop-filter: blur(5px);
+}
+
+/* Efek Hover (Saat Disentuh Mouse) */
+.social-media a:hover {
+  background: #7aa2ff;
+  color: #02050a; /* Icon jadi hitam biar kontras */
+  box-shadow: 0 0 20px #7aa2ff; /* Glow Effect */
+  transform: translateY(-5px); /* Naik dikit */
+}
+/* ================= ABOUT ================= */
+/* ================= ABOUT (ANTI-FLAT & GLOWING) ================= */
+
+/* 1. Judul Two-Tone (Putih & Biru) */
+#about h2 {
+    font-size: 40px;
+    color: #fff; /* Kata "About" jadi putih */
+    margin-bottom: 50px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+#about h2 span {
+    color: #7aa2ff; /* Kata "Me" jadi Biru Neon */
+    text-shadow: 0 0 15px rgba(122, 162, 255, 0.6); /* Efek cahaya */
+}
+
+/* 2. Container dengan Efek 3D Glow */
+.about-container {
+    position: relative; /* Penting untuk efek glow */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    
+    /* Kartu Kaca Lebih Terang Sedikit */
+    background: rgba(255, 255, 255, 0.05); 
+    padding: 60px;
+    border-radius: 20px;
+    
+    /* Border halus & Shadow */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    
+    max-width: 1100px;
+    width: 100%;
+    z-index: 1; /* Supaya konten di atas cahaya */
+}
+
+/* --- RAHASIA AGAR TIDAK FLAT: Bola Cahaya di Belakang Kartu --- */
+.about-container::before {
+    content: '';
+    position: absolute;
+    top: -50px;      /* Geser ke atas kiri */
+    left: -50px;
+    width: 150px;
+    height: 150px;
+    background: #7aa2ff; /* Warna Biru */
+    filter: blur(80px);  /* Blur parah biar jadi cahaya */
+    opacity: 0.4;        /* Transparan */
+    z-index: -1;         /* Taruh di belakang kartu */
+    border-radius: 50%;
+}
+
+.about-container::after {
+    content: '';
+    position: absolute;
+    bottom: -50px;   /* Geser ke bawah kanan */
+    right: -50px;
+    width: 150px;
+    height: 150px;
+    background: #00e5ff; /* Warna Cyan */
+    filter: blur(80px);
+    opacity: 0.3;
+    z-index: -1;
+    border-radius: 50%;
+}
+
+/* 3. Typography & Button */
+.about-card {
+    flex: 1;
+    text-align: left;
+}
+
+.about-card h3 {
+    font-size: 26px;
+    color: #fff;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.about-card p {
+    font-size: 16px;
+    color: #cbd5e1;
+    line-height: 1.8;
+    margin-bottom: 25px; /* Jarak antar paragraf */
+}
+
+.about-btn {
+    margin-top: 30px; /* Jarak tombol dari teks */
+}
+
+/* 4. Gambar dengan Frame Unik */
+.about-image {
+    flex: 0.8;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.about-image img {
+    width: 300px;
+    border-radius: 20px;
+    /* Frame border ganda biar keren */
+    border: 2px solid rgba(255,255,255,0.2);
+    /* Shadow solid di bawah gambar */
+    box-shadow: 20px 20px 0px rgba(122, 162, 255, 0.2); 
+    transition: 0.4s;
+}
+
+.about-image img:hover {
+    transform: scale(1.02);
+    box-shadow: 20px 20px 0px #cdcdcdff; /* Saat hover shadow jadi terang */
+    border-color: #fff;
+}
+
+/* Responsive HP */
+@media (max-width: 768px) {
+    .about-container {
+        flex-direction: column-reverse; /* Gambar di atas, Teks di bawah */
+        padding: 30px;
+        text-align: center;
+    }
+    .about-card { text-align: center; }
+    .about-container::before, .about-container::after { display: none; } /* Matikan glow di HP biar ringan */
+}
+
+/* ================= SKILL ================= */
+/* ================= SKILL (GRID CARD STYLE) ================= */
+.skill-container {
+  display: grid;
+  /* Membuat kolom otomatis (seperti tabel). Minimal lebar 150px, kalau muat tambah kolom */
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 25px; /* Jarak antar kotak */
+  max-width: 900px;
+  width: 100%;
+  padding: 20px;
+}
+
+.skill-card {
+  background: rgba(255, 255, 255, 0.05); /* Kaca Gelap */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 30px 20px;
+  text-align: center;
+  transition: 0.4s;
+  cursor: default;
+
+  /* Agar icon dan teks rapi di tengah */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+/* Ukuran Icon */
+.skill-card i {
+  font-size: 3.5rem; /* Icon Besar */
+  margin-bottom: 10px;
+  transition: 0.4s;
+  /* Efek shadow halus di belakang icon */
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
+}
+
+.skill-card h3 {
+  font-size: 18px;
+  font-weight: 500;
+  color: #fff;
+}
+
+/* --- EFEK HOVER --- */
+.skill-card:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-10px); /* Naik ke atas */
+  border-color: #7aa2ff; /* Border jadi biru neon */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.skill-card:hover i {
+  transform: scale(1.2); /* Icon membesar */
+  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.6)); /* Icon bersinar */
+}
+
+/* Responsive HP */
+@media (max-width: 768px) {
+  .skill-container {
+    /* Di HP jadi 2 kolom */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .skill-card {
+    padding: 20px;
+  }
+
+  .skill-card i {
+    font-size: 2.5rem;
+  }
+}
+
+/* ================= PROJECT (Old HTML Friendly) ================= */
+/* Trik: Gunakan Text Align Center untuk section project */
+/* ================= PROJECT (GRID / TABLE CARD STYLE) ================= */
+
+/* 1. Container Utama (Grid System) */
+.project-container {
+  display: grid;
+  /* Membuat kolom otomatis. Minimal lebar kartu 300px.
+       Jika layar lebar, dia bikin 2-3 kolom. Jika sempit, jadi 1 kolom. */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px; /* Jarak antar kartu */
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto; /* Posisi tengah */
+  padding: 20px;
+}
+
+/* 2. Kartu Project (Glass Effect) */
+/* ================= PROJECT CARD DENGAN GRADIENT GLOW ================= */
+
+/* 2. Kartu Project (Glass Effect Base) */
+.project-card {
+  /* Background dasar kaca transparan */
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.4s ease;
+  /* PENTING: position relative agar pseudo-element bisa diatur posisinya */
+  position: relative;
+  height: 100%;
+  z-index: 1; /* Agar konten tetap di atas gradient */
+}
+
+/* --- MAJIC: Lapisan Gradient Rahasia (Pseudo-element) --- */
+/* Kita buat lapisan gradient di belakang kartu, tapi kita sembunyikan dulu (opacity 0) */
+.project-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px; /* Samakan lengkungan dengan kartu */
+
+  /* DEFINISI GRADIENT YANG "GA NORAK": */
+  /* Arah 135deg (pojok kiri atas ke kanan bawah) */
+  /* Warna 1 (0%): Biru Neon tema kamu, tapi agak transparan (0.2) */
+  /* Warna 2 (100%): Transparan total agar menyatu dengan background */
+  background: linear-gradient(
+    135deg,
+    rgba(122, 162, 255, 0.25) 0%,
+    rgba(0, 0, 0, 0) 70%
+  );
+
+  opacity: 0; /* Sembunyi dulu */
+  transition: opacity 0.4s ease; /* Muncul perlahan */
+  z-index: -1; /* Taruh di belakang konten teks/gambar */
+}
+
+/* Efek Hover pada Kartu Utama */
+.project-card:hover {
+  transform: translateY(-10px); /* Naik ke atas */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6); /* Bayangan lebih dalam */
+  border-color: #7aa2ff; /* Border jadi biru menyala */
+
+  /* CATATAN: Background solid pada hover sebelumnya D HAPUS 
+       agar tidak menutupi gradient ::before */
+}
+
+/* SAAT HOVER: Munculkan lapisan gradient tadi */
+.project-card:hover::before {
+  opacity: 1; /* Gradient muncul halus */
+}
+
+/* --- (Sisa CSS Project lainnya seperti .project-img, .btn-github, dll. TETAP SAMA) --- */
+/* Pastikan Anda tidak menghapus CSS bagian gambar dan teks di bawahnya */
+/* 3. Area Gambar (Thumbnail) */
+.project-img {
+  position: relative;
+  width: 100%;
+  height: 220px; /* Tinggi gambar fixed biar rapi */
+  overflow: hidden;
+}
+
+.project-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Gambar menyesuaikan kotak tanpa gepeng */
+  transition: transform 0.5s ease;
+}
+
+/* Overlay Hitam (Muncul saat hover) */
+.project-img .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7); /* Hitam transparan */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0; /* Awalnya sembunyi */
+  transition: opacity 0.4s ease;
+}
+
+/* Animasi: Gambar Zoom & Overlay Muncul */
+.project-card:hover .project-img img {
+  transform: scale(1.1);
+}
+.project-card:hover .project-img .overlay {
+  opacity: 1;
+}
+
+/* 4. Tombol GitHub */
+.btn-github {
+  background: #fff;
+  color: #02050a;
+  padding: 10px 25px;
+  border-radius: 30px;
+  font-weight: 600;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transform: translateY(20px); /* Awalnya agak di bawah */
+  transition: all 0.4s ease;
+}
+
+.btn-github:hover {
+  background: #7aa2ff; /* Biru Neon */
+  color: #fff;
+}
+
+/* Tombol naik ke posisi normal saat hover */
+.project-card:hover .btn-github {
+  transform: translateY(0);
+}
+
+/* 5. Konten Teks */
+.project-content {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Mengisi sisa ruang agar rapi */
+}
+
+.project-content h3 {
+  font-size: 22px;
+  color: #fff;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.project-content p {
+  font-size: 14px;
+  color: #cbd5e1; /* Abu-abu terang */
+  line-height: 1.6;
+  margin-bottom: 20px;
+  flex-grow: 1; /* Dorong tech stack ke paling bawah */
+}
+
+/* 6. Label Teknologi (Tech Stack) */
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: auto; /* Pastikan selalu di dasar kartu */
+}
+
+.project-tech span {
+  font-size: 12px;
+  font-weight: 500;
+  background: rgba(122, 162, 255, 0.1); /* Biru transparan */
+  color: #7aa2ff;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(122, 162, 255, 0.2);
+}
+
+/* Responsive Khusus HP (Opsional, karena Grid sudah otomatis) */
+@media (max-width: 768px) {
+  .project-container {
+    padding: 10px;
+    gap: 20px;
+  }
+  .project-img {
+    height: 200px;
+  }
+}
+/* ================= CONTACT ================= */
+#contact ul {
+  list-style: none;
+  text-align: center;
+}
+#contact ul li {
+  margin: 15px 0;
+  font-size: 18px;
+}
+#contact ul li a {
+  color: #7aa2ff;
+}
+
+/* ================= FOOTER ================= */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  font-size: 14px;
+  color: #8892b0;
+}
+/* ================= ANIMASI SCROLL FINAL (TARUH PALING BAWAH) ================= */
+
+/* Keadaan Awal: Di atas & Transparan */
+/* Pastikan 'transition' ada di sini (Induk) */
+.reveal {
+    transform: translateY(-100px);
+    opacity: 0;
+    /* Transition ditaruh di sini supaya pas MUNCUL mulus, pas HILANG juga mulus */
+    transition: all 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.reveal.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+/* Delay supaya munculnya gantian */
+.delay-1 { transition-delay: 0.2s; }
+.delay-2 { transition-delay: 0.4s; }
+.delay-3 { transition-delay: 0.6s; }
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  nav {
+    padding: 15px 20px;
+  }
+  nav ul {
+    display: none;
+  }
+
+  .home-content,
+  .about-container {
+    flex-direction: column;
+    text-align: center;
+  }
+  .home-content {
+    flex-direction: column-reverse;
+  }
+
+  .home-image img {
+    width: 250px;
+    height: 250px;
+  }
+  .about-card h2 {
+    text-align: center;
+  }
+  .project-item {
+    width: 100%;
+    display: block;
+    margin: 20px 0;
+  }
+}
