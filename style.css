@@ -142,7 +142,7 @@ nav ul li a:hover {
 }
 /* --- STYLE LOGO UTAMA --- */
 .logo {
-    font-size: 1.7rem; /* Ukuran font logo */
+    font-size: 1rem; /* Ukuran font logo */
     font-weight: 700;
     color: white;
     text-decoration: none; /* Hilangkan garis bawah link */
