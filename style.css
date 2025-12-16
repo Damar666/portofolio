@@ -304,6 +304,13 @@ section p {
   .home-text h1 {
     font-size: 32px;
   }
+  .home-img img {
+     /* Angka minus (-) artinya geser ke KIRI */
+     transform: translateX(-20px); 
+  }
+  .home-image img {
+    margin-right: 55px;
+  }
   .home-text h3 {
     font-size: 24px;
   }
