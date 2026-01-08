@@ -105,7 +105,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const navLinks = document.querySelectorAll('.nav-list a');
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
-            if (navList) navList.classList.remove('active');
+            // Delay 100ms biar smooth scroll jalan dulu, baru menu nutup
+            setTimeout(() => {
+                if (navList) navList.classList.remove('active');
+            }, 100);
         });
     });
 
